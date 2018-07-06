@@ -15,7 +15,7 @@ export class ParentComponent implements OnInit {
   }
 
   updateArrayElements($event){
-    console.log($event)
+    //console.log($event)
     this.arrayElements = $event;
   }
 

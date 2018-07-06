@@ -1,29 +1,36 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Input, DoCheck, IterableDiffers, SimpleChange, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-children2',
   templateUrl: './children2.component.html',
   styleUrls: ['./children2.component.css']
 })
-export class Children2Component implements OnInit, OnChanges {
+export class Children2Component implements OnInit, DoCheck {
 
-  @Input() elements : any[] ;
+  @Input() elements : any[] = [] ;
   public pairs : any[] = [];
+  differ : any;
 
-  constructor() { }
-
-  ngOnInit() {
-    
+  constructor(private _differs: IterableDiffers) {
+    this.differ = _differs.find([]).create(null);
   }
 
-  ngOnChanges(changes){
-    //  console.log(changes.elements.currentValue[3])
-    changes.elements.currentValue.forEach(element => {
-      console.log(element)
-      if(element.index % 2 == 0){
-        this.pairs.push(element);
-      }
-    });
+  ngOnInit(){
+
   }
 
+  ngDoCheck() {
+    const change = this.differ.diff(this.elements);
+    if(change){
+      this.pairs = []
+      change.collection.forEach(element => {
+        if(element.index % 2 == 0){
+          this.pairs.push(element)
+        }
+      });
+      //console.log(change.collection);  
+    }
+  }
+
+  
 }
