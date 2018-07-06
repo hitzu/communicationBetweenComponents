@@ -1,0 +1,13 @@
+.elements{
+    text-align: center;
+}
+
+.button{
+    text-align: center;
+}
+
+.button > button{
+    width: 25%;
+    background-color: gray;
+    border-radius: 25px;
+}

@@ -1,0 +1,11 @@
+<div class="left">
+  <app-children1
+    (arrayOutput) = "updateArrayElements($event)"
+  ></app-children1>
+</div>
+<div class="right">
+  <app-children2
+    [(elements)] = arrayElements
+  ></app-children2>
+</div>
+
